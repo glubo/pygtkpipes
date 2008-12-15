@@ -8,7 +8,7 @@ from configuration  import Configuration
 from pixbufbank import PixBufBank
 
 class Vec2:
-	def __init__(self, x=0., y=0.):
+	def __init__(self, x=0, y=0):
 		self.x = x
 		self.y = y
 # Tile types:
@@ -30,13 +30,44 @@ def GetRotations(type):
 	elif type == 4:
 		return 1
 	else: return 1
+
 def GetConnections(type, rotation):
-	if type == 1:
+	if type == 0:
+		if rotation == 0:
+			return [Vec2(0,1)]
+		elif rotation == 1:
+			return [Vec2(-1,0)]
+		elif rotation == 2:
+			return [Vec2(0,-1)]
+		elif rotation == 3:
+			return [Vec2(1,0)]
+	elif type == 1:
 		if (rotation % 2) == 0:
-			return [Vec2(-1.,0.), Vec2(1., 0.)]
+			return [Vec2(0,-1), Vec2(0, 1)]
 		else:
-			return [Vec2(0.,-1.), Vec2(0., 1.)]
+			return [Vec2(-1,0), Vec2(1, 0)]
+	if type == 2:
+		if rotation == 0:
+			return [Vec2(0,1), Vec2(1,0)]
+		elif rotation == 1:
+			return [Vec2(0,1), Vec2(-1,0)]
+		elif rotation == 2:
+			return [Vec2(0,-1), Vec2(-1,0)]
+		elif rotation == 3:
+			return [Vec2(0,-1), Vec2(1,0)]
+	if type == 3:
+		if rotation == 0:
+			return [Vec2(0,1), Vec2(0,-1), Vec2(1,0)]
+		elif rotation == 1:
+			return [Vec2(0,1), Vec2(1,0), Vec2(0,1)]
+		elif rotation == 2:
+			return [Vec2(0,1), Vec2(0,-1), Vec2(-1,0)]
+		elif rotation == 3:
+			return [Vec2(0,-1), Vec2(1,0), Vec2(-1,0)]
+	if type == 4:
+		return [Vec2(0,1), Vec2(0,-1), Vec2(1,0), Vec2(-1,0)]
 	else: return []
+
 
 class Tile:
 	def __init__(self, type, rotation, accessible=False):
@@ -54,8 +85,8 @@ class PipesGrid:
 		for y in range(0, yy):
 			for x in range(0,xx):
 				IB = PixBufBank()
-				type = 0 if (y%2)==0 else 3;
-				rotation = x%4
+				type = (x+y)%5;
+				rotation = 0*x%GetRotations(type)
 				accessible = False
 				self.buttons.append(gtk.Button())
 				but = self.GetButton(x, y)
