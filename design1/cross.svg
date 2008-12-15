@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://inkscape.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100"
+   height="100"
+   id="svg3100"
+   sodipodi:version="0.32"
+   inkscape:version="0.43"
+   version="1.0"
+   sodipodi:docbase="/home/glubo/src/pipemania/design1"
+   sodipodi:docname="cross.svg">
+  <defs
+     id="defs3102" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="39.130844"
+     inkscape:cy="42.129306"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="797"
+     inkscape:window-height="848"
+     inkscape:window-x="477"
+     inkscape:window-y="25" />
+  <metadata
+     id="metadata3105">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:nodetypes="ccccc"
+       id="path3098"
+       d="M 45.005076,0 L 55.005076,0 L 55.005076,100 L 45.005076,100 L 45.005076,0 z "
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <g
+       id="g4006"
+       transform="translate(0,-0.471275)">
+      <path
+         style="fill:#3532ae;fill-opacity:1;fill-rule:evenodd;stroke:#00008c;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 54.5 54.5625 L 54.5 59.5625 L 54.5 99.5 L 64.5 99.5 L 64.5 95.03125 L 59.5 95.03125 L 59.5 59.5625 L 94.96875 59.5625 L 94.96875 64.5625 L 99.4375 64.5625 L 99.4375 54.5625 L 59.5 54.5625 L 54.5 54.5625 z "
+         transform="translate(0,0.471275)"
+         id="path3130" />
+      <path
+         style="fill:#3532ae;fill-opacity:1;fill-rule:evenodd;stroke:#00008c;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 0.5 54.5625 L 0.5 64.5625 L 4.96875 64.5625 L 4.96875 59.5625 L 39.5 59.5625 L 39.5 95.03125 L 34.5 95.03125 L 34.5 99.5 L 44.5 99.5 L 44.5 59.5625 L 44.5 54.5625 L 39.5 54.5625 L 0.5 54.5625 z "
+         transform="translate(0,0.471275)"
+         id="path3126" />
+      <path
+         style="fill:#3532ae;fill-opacity:1;fill-rule:evenodd;stroke:#00008c;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 54.5 0.5625 L 54.5 39.5625 L 54.5 44.5625 L 59.5 44.5625 L 99.4375 44.5625 L 99.4375 34.5625 L 94.96875 34.5625 L 94.96875 39.5625 L 59.5 39.5625 L 59.5 5.03125 L 64.5 5.03125 L 64.5 0.5625 L 54.5 0.5625 z "
+         transform="translate(0,0.471275)"
+         id="path3122" />
+      <path
+         style="fill:#3532ae;fill-opacity:1;fill-rule:evenodd;stroke:#00008c;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="M 34.5 0.5625 L 34.5 5.03125 L 39.5 5.03125 L 39.5 39.5625 L 4.96875 39.5625 L 4.96875 34.5625 L 0.5 34.5625 L 0.5 44.5625 L 39.5 44.5625 L 44.5 44.5625 L 44.5 39.5625 L 44.5 0.5625 L 34.5 0.5625 z "
+         transform="translate(0,0.471275)"
+         id="path3118" />
+    </g>
+    <g
+       id="g4012"
+       transform="matrix(0,1,-1,0,99.54569,6.25e-2)" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       id="path4034"
+       d="M 100,45 L 100,55 L 2.1e-06,55 L 2.1e-06,45 L 100,45 z "
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+</svg>
