@@ -7,36 +7,6 @@ import gtk
 from configuration  import Configuration
 from pixbufbank import PixBufBank
 
-class PixBufBank:
-	def GetPixBuf(self, type, rotation, accessible):
-		return self.I[rotation]
-	def LoadImages(self):
-		c = Configuration()
-		self.I = []
-		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design1/I.svg', c.TileSize, c.TileSize))
-		self.I.append(self.I[0].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))
-	#below is singleton implementation
-	class __impl:
-		pass
-
-	__instance = None
-
-	def __init__(self):
-		# Check if we already have an instance
-		if PixBufBank.__instance is None:
-			# Create and remember instance
-			PixBufBank.__instance = PixBufBank.__impl()
-			self.LoadImages()
-
-		# Store instance reference as the only member in the handle
-		self.__dict__['_PixBufBank__instance'] = PixBufBank.__instance
-
-	def __getattr__(self, attr):
-		return getattr(self.__instance, attr)
-
-	def __setattr__(self, attr, value):
-		return setattr(self.__instance, attr, value)
-
 class Vec2:
 	def __init__(self, x=0., y=0.):
 		self.x = x
@@ -49,8 +19,16 @@ class Vec2:
 # 4: +
 
 def GetRotations(type):
-	if type == 1:
+	if type == 0:
+		return 4
+	elif type == 1:
 		return 2
+	elif type == 2:
+		return 4
+	elif type == 3:
+		return 4
+	elif type == 4:
+		return 1
 	else: return 1
 def GetConnections(type, rotation):
 	if type == 1:
@@ -76,8 +54,8 @@ class PipesGrid:
 		for y in range(0, yy):
 			for x in range(0,xx):
 				IB = PixBufBank()
-				type = 1
-				rotation = x%2
+				type = 0 if (y%2)==0 else 3;
+				rotation = x%4
 				accessible = False
 				self.buttons.append(gtk.Button())
 				but = self.GetButton(x, y)
