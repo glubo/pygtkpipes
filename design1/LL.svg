@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100"
+   height="100"
+   id="svg3100"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   version="1.0"
+   sodipodi:docbase="/home/glubo/src/pipemania/design1"
+   sodipodi:docname="LL.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs3102">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 50 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="100 : 50 : 1"
+       inkscape:persp3d-origin="50 : 33.333333 : 1"
+       id="perspective15" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.959798"
+     inkscape:cx="24.80213"
+     inkscape:cy="65.549842"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1272"
+     inkscape:window-height="976"
+     inkscape:window-x="0"
+     inkscape:window-y="0" />
+  <metadata
+     id="metadata3105">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       sodipodi:nodetypes="ccccc"
+       id="path3098"
+       d="M 45.005076,44.446712 L 55.005076,44.446712 L 55.005076,100 L 45.005076,100 L 45.005076,44.446712 z"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       id="path3130"
+       d="M 54.5,54.5625 L 54.5,59.5625 L 54.5,99.5 L 64.5,99.5 L 64.5,95.03125 L 59.5,95.03125 L 59.5,59.5625 L 94.96875,59.5625 L 94.96875,64.5625 L 99.4375,64.5625 L 99.4375,54.5625 L 59.5,54.5625 L 54.5,54.5625 z"
+       style="fill:#3532ae;fill-opacity:1;fill-rule:evenodd;stroke:#00008c;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+    <path
+       style="fill:#3532ae;fill-opacity:1;fill-rule:evenodd;stroke:#00008c;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 94.96875,34.5625 L 94.96875,39.5625 L 39.5,39.53125 L 39.5,95.03125 L 34.5,95.03125 L 34.5,99.5 L 44.5,99.5 L 44.5,44.53125 L 99.4375,44.5625 L 99.4375,34.5625 L 94.96875,34.5625 z"
+       id="path3126"
+       sodipodi:nodetypes="ccccccccccc" />
+    <g
+       id="g4012"
+       transform="matrix(0,1,-1,0,99.54569,6.25e-2)" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       id="path4034"
+       d="M 100,45 L 100,55 L 45.456866,55 L 45.456866,45 L 100,45 z"
+       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  </g>
+</svg>
