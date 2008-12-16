@@ -3,6 +3,7 @@
 import pygtk
 pygtk.require('2.0')
 import gtk
+import random
 
 from configuration  import Configuration
 from pixbufbank import PixBufBank
@@ -92,14 +93,16 @@ def GenerateTileGrid(xx,yy,sx,sy):
 				return False
 		return True
 	def IsUnreached(x,y):
-		if not (0 <= x < xx) or not (0 <= y < yy):
+		if (not (0 <= x < xx)) or (not (0 <= y < yy)):
 			return False
 		return  not Tile(x,y)[0]
 	def PickOneLooseEndID():
-		return looseends[0]
+		return random.choice(looseends)
 	def PickOneFreeDirectionFromID(i):
 		pos = I2VEC(i)
-		for d in [Vec2(-1,0), Vec2(0,1), Vec2(1,0), Vec2(0,-1)]:
+		dirs = [Vec2(-1,0), Vec2(0,1), Vec2(1,0), Vec2(0,-1)]
+		random.shuffle(dirs)
+		for d in dirs:
 			if IsUnreached (pos.x + d.x, pos.y + d.y):
 				return d
 		else: print "No Free Direction :-X"
@@ -117,7 +120,11 @@ def GenerateTileGrid(xx,yy,sx,sy):
 				line += str(TTile(y,x))
 			print line
 
-	def DeleteFromLoosendIfAppropriate(i):
+	def CleanLooseEnds():
+		lc = looseends[:]
+		for id in lc:
+			DeleteFromLoosendsIfAppropriate(id)
+	def DeleteFromLoosendsIfAppropriate(i):
 		if not looseends.__contains__(i):
 			return
 		remove = True
@@ -128,13 +135,11 @@ def GenerateTileGrid(xx,yy,sx,sy):
 		if remove:
 			looseends.remove(i)
 
-	
 	Tile(sx,sy)[0] = True
 	looseends.append(XY2I(sx,sy))
 	while not IsAllReachable ():
 		i = PickOneLooseEndID ()
 		direction = PickOneFreeDirectionFromID(i)
-		print str(I2VEC(i))+'->'+str(direction)
 
 		t_pos = I2VEC (i)
 		tile = grid[i]
@@ -147,9 +152,7 @@ def GenerateTileGrid(xx,yy,sx,sy):
 		tile[1].append (direction)
 		dtile[1].append (Vec2 (0 - direction.x, 0 - direction.y))
 		looseends.append(d_i)
-		DeleteFromLoosendIfAppropriate(i)
-		DeleteFromLoosendIfAppropriate(d_i)
-		PrintGrid()
+		CleanLooseEnds()
 
 	#here we have already grid full, now only convert to hgrid:
 	GridToTGrid()
