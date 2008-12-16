@@ -134,7 +134,7 @@ def HashToTile(hash):
 			return Tile(0, 1)
 	elif hash[3] == 'r':
 		return Tile(0, 3)
-	else: return Tile()
+	else: return Tile(4,0)
 		
 
 class Tile:
@@ -145,6 +145,7 @@ class Tile:
 		
 class PipesGrid:
 	def __init__(self, xx=10, yy=10):
+		IB = PixBufBank()
 		self.widget = gtk.Table(rows=xx, columns=yy, homogeneous = True)
 		self.xx = xx
 		self.yy = yy
@@ -152,7 +153,6 @@ class PipesGrid:
 		self.tiles = []
 		for y in range(0, yy):
 			for x in range(0,xx):
-				IB = PixBufBank()
 				type = (x+y)%5;
 				rotation = 0*x%GetRotations(type)
 				accessible = False
