@@ -76,11 +76,11 @@ def GetTileFromConnections(con):
 			self.left = False
 			self.right = False
 		def String(self):
-			string = ''
-			if self.up: string += 'u'
-			if self.down: string += 'd'
-			if self.left: string += 'l'
-			if self.right: string += 'r'
+			string = 'XXXX'
+			if self.up: string[0] = 'u'
+			if self.down: string[1]= 'd'
+			if self.left: string[2]= 'l'
+			if self.right: string[3]= 'r'
 	dir = direction()
 	for c in con:
 		if c.x == 0:
@@ -97,7 +97,45 @@ def GetTileFromConnections(con):
 	return HashToTile(hash)
 
 def HashToTile(hash):
-	
+	if hash[0] == 'u':
+		if hash[1] == 'd':
+			if hash[2] == 'l':
+				if hash[3] == 'r':
+					return Tile(4, 0)
+				else:
+					return Tile(3, 2)
+			elif hash[3] == 'r':
+				return Tile(3, 0)
+			else:
+				return Tile(1, 0)
+		elif hash[2] == 'l':
+			if hash[3] == 'r':
+				return Tile(3, 3)
+			else:
+				return Tile(2, 2)
+		elif hash[3] == 'r':
+			return Tile(2, 3)
+		else:
+			return Tile(0, 2)
+	elif hash[1] == 'd':
+		if hash[2] == 'l':
+			if hash[3] == 'r':
+				return Tile(3, 1)
+			else:
+				return Tile(2, 1)
+		elif hash[3] == 'r':
+			return Tile(2, 0)
+		else:
+			return Tile(0, 0)
+	elif hash[2] == 'l':
+		if hash[3] == 'r':
+			return Tile(1, 1)
+		else:
+			return Tile(0, 1)
+	elif hash[3] == 'r':
+		return Tile(0, 3)
+	else: return Tile()
+		
 
 class Tile:
 	def __init__(self, type, rotation, accessible=False):
