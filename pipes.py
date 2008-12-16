@@ -68,6 +68,36 @@ def GetConnections(type, rotation):
 		return [Vec2(0,1), Vec2(0,-1), Vec2(1,0), Vec2(-1,0)]
 	else: return []
 
+def GetTileFromConnections(con):
+	class direction:
+		def __init__(self):
+			self.up = False
+			self.down = False
+			self.left = False
+			self.right = False
+		def String(self):
+			string = ''
+			if self.up: string += 'u'
+			if self.down: string += 'd'
+			if self.left: string += 'l'
+			if self.right: string += 'r'
+	dir = direction()
+	for c in con:
+		if c.x == 0:
+			if c.y == -1:
+				dir.up = True
+			elif c.y == 1:
+				dir.down = True
+		elif c.y == 0:
+			if c.x == -1:
+				dir.left = True
+			elif c.x == 1:
+				dir.right = True
+	hash = dir.String()
+	return HashToTile(hash)
+
+def HashToTile(hash):
+	
 
 class Tile:
 	def __init__(self, type, rotation, accessible=False):
