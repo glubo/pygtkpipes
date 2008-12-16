@@ -172,6 +172,16 @@ class PipesGrid:
 		but.add (gtk.image_new_from_pixbuf(IB.GetPixBuf(tile.type, tile.rotation, tile.accessible)))
 		but.get_child().show()
 
+	def RegenerateImages(self):
+		IB = PixBufBank()
+		for y in range(0, self.yy): 
+			for x in range(0, self.xx):
+				tile = self.GetTile(x,y)
+				but = self.GetButton(x,y)
+				but.remove (but.get_child())
+				but.add (gtk.image_new_from_pixbuf(IB.GetPixBuf(tile.type, tile.rotation, tile.accessible)))
+				but.get_child().show()
+		
 	def GetButton(self, x, y):
 		return self.buttons[x+(y)*self.xx]
 	def GetTile(self, x, y):
@@ -180,16 +190,46 @@ class PipesGrid:
 		return self.widget
 				
 class Hello:
-	def hello(self, widget, data=None):
-		print "Hello World!!!"
 	def destroy(self, widget, data=None):
 		gtk.main_quit()
+	def SetSize(self, widget, size=None):
+		if size > 0:
+			c = Configuration()
+			c.TileSize = size
+			IB = PixBufBank()
+			IB.LoadImages()
+			self.grid.RegenerateImages()
+			self.window.resize(1,1)
 	def __init__(self):
 		c = Configuration()
 		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
 		self.window.connect("destroy", self.destroy)
+		self.VBox = gtk.VBox()
+		self.window.add (self.VBox)
+
+		menu_bar = gtk.MenuBar()
+		self.VBox.pack_start(menu_bar, False, False, 2)
+
+		file_menu_i = gtk.MenuItem("_File")
+		menu_bar.append (file_menu_i)
+		file_menu = gtk.Menu()
+		it = gtk.MenuItem('E_xit')
+		file_menu.append (it)
+		it.connect("activate", self.destroy)
+		file_menu_i.set_submenu (file_menu)
+
+		tsize_menu_i = gtk.MenuItem("_Tile Size")
+		menu_bar.append (tsize_menu_i)
+		tsize_menu = gtk.Menu()
+		for i in [5, 10, 15, 20, 30, 40, 50, 60, 70, 80]:
+			it = gtk.MenuItem("%d px"%i)
+			tsize_menu.append (it)
+			it.connect("activate", self.SetSize, i)
+		tsize_menu_i.set_submenu (tsize_menu)
+
+
 		self.grid = PipesGrid(c.GridXX, c.GridYY)
-		self.window.add (self.grid.Widget())
+		self.VBox.add (self.grid.Widget())
 		self.window.show_all()
 	def main(self):
 		gtk.main()
