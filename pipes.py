@@ -11,6 +11,8 @@ class Vec2:
 	def __init__(self, x=0, y=0):
 		self.x = x
 		self.y = y
+	def __str__(self):
+		return "["+str(self.x)+":"+str(self.y)+"]"
 # Tile types:
 # 0: end
 # 1: I
@@ -68,6 +70,93 @@ def GetConnections(type, rotation):
 		return [Vec2(0,1), Vec2(0,-1), Vec2(1,0), Vec2(-1,0)]
 	else: return []
 
+def GenerateTileGrid(xx,yy,sx,sy):
+	grid = []
+	tgrid = []
+	looseends = []
+
+	for i in range(0,xx*yy):
+		grid.append([False,[]])
+	
+	def XY2I(x,y):
+		return x+y*xx
+	def I2VEC(i):
+		return Vec2(i%xx, i/xx)
+	def Tile(x,y):
+		return grid[XY2I(x,y)]
+	def TTile(x,y):
+		return tgrid[XY2I(x,y)]
+	def IsAllReachable():
+		for i in range(0,xx*yy):
+			if grid[i][0] == False:
+				return False
+		return True
+	def IsUnreached(x,y):
+		if not (0 <= x < xx) or not (0 <= y < yy):
+			return False
+		return  not Tile(x,y)[0]
+	def PickOneLooseEndID():
+		return looseends[0]
+	def PickOneFreeDirectionFromID(i):
+		pos = I2VEC(i)
+		for d in [Vec2(-1,0), Vec2(0,1), Vec2(1,0), Vec2(0,-1)]:
+			if IsUnreached (pos.x + d.x, pos.y + d.y):
+				return d
+		else: print "No Free Direction :-X"
+	def GridToTGrid():
+		del tgrid[:]
+		for i in range (0, xx*yy):
+			tgrid.append (GetTileFromConnections (grid[i][1]))
+		tgrid[XY2I (sx, sy)].accessible = True
+		tgrid[XY2I (sx, sy)].start = True
+	def PrintGrid():
+		GridToTGrid()
+		for x in range(0,xx):
+			line = ''
+			for y in range(0,yy):
+				line += str(TTile(y,x))
+			print line
+
+	def DeleteFromLoosendIfAppropriate(i):
+		if not looseends.__contains__(i):
+			return
+		remove = True
+		pos = I2VEC (i)
+		for d in [Vec2(-1,0), Vec2(0,1), Vec2(1,0), Vec2(0,-1)]:
+			if IsUnreached (pos.x + d.x, pos.y + d.y):
+				remove = False
+		if remove:
+			looseends.remove(i)
+
+	
+	Tile(sx,sy)[0] = True
+	looseends.append(XY2I(sx,sy))
+	while not IsAllReachable ():
+		i = PickOneLooseEndID ()
+		direction = PickOneFreeDirectionFromID(i)
+		print str(I2VEC(i))+'->'+str(direction)
+
+		t_pos = I2VEC (i)
+		tile = grid[i]
+
+		d_pos = Vec2 (t_pos.x + direction.x, t_pos.y + direction.y)
+		d_i = XY2I (d_pos.x, d_pos.y) 
+		dtile = grid[d_i]
+
+		dtile[0] = True
+		tile[1].append (direction)
+		dtile[1].append (Vec2 (0 - direction.x, 0 - direction.y))
+		looseends.append(d_i)
+		DeleteFromLoosendIfAppropriate(i)
+		DeleteFromLoosendIfAppropriate(d_i)
+		PrintGrid()
+
+	#here we have already grid full, now only convert to hgrid:
+	GridToTGrid()
+	PrintGrid()
+	return tgrid
+
+	
 def GetTileFromConnections(con):
 	class direction:
 		def __init__(self):
@@ -76,14 +165,16 @@ def GetTileFromConnections(con):
 			self.left = False
 			self.right = False
 		def String(self):
-			if self.up: string.append('u')
-			else: string.append('X')
-			if self.down:  string.append('d')
-			else: string.append('X')
-			if self.left:  string.append('l')
-			else: string.append('X')
-			if self.right: string.append('r')
-			else: string.append('X')
+			string = ''
+			if self.up: string+='u'
+			else: string+='X'
+			if self.down:  string+='d'
+			else: string+='X'
+			if self.left:  string+='l'
+			else: string+='X'
+			if self.right: string+='r'
+			else: string+='X'
+			return string
 	dir = direction()
 	for c in con:
 		if c.x == 0:
@@ -146,6 +237,28 @@ class Tile:
 		self.rotation = rotation
 		self.accessible = accessible
 		self.start = False
+	def __str__(self):
+		if self.type == 0:
+			if self.rotation == 0: return 'V'
+			if self.rotation == 1: return '<'
+			if self.rotation == 2: return '^'
+			if self.rotation == 3: return '>'
+		if self.type == 1:
+			if self.rotation == 0: return '|'
+			if self.rotation == 1: return '-'
+		if self.type == 2:
+			if self.rotation == 0: return 'L'
+			if self.rotation == 1: return 'L'
+			if self.rotation == 2: return 'L'
+			if self.rotation == 3: return 'L'
+		if self.type == 3:
+			if self.rotation == 0: return 'T'
+			if self.rotation == 1: return 'T'
+			if self.rotation == 2: return 'T'
+			if self.rotation == 3: return 'T'
+		if self.type == 4:
+			return '+'
+		return 'tile'
 		
 class PipesGrid:
 	def __init__(self, xx=10, yy=10):
@@ -154,19 +267,19 @@ class PipesGrid:
 		self.xx = xx
 		self.yy = yy
 		self.buttons = []
-		self.tiles = []
+		self.tiles = GenerateTileGrid(xx, yy, xx/2, yy/2)
 		for y in range(0, yy):
 			for x in range(0,xx):
-				type = (x+y)%5;
-				rotation = 0*x%GetRotations(type)
-				accessible = False
+				tile = self.tiles[x+y*xx]
+				type = tile.type;
+				rotation = tile.rotation
+				accessible = tile.accessible
 				self.buttons.append(gtk.Button())
 				but = self.GetButton(x, y)
 				but.set_border_width(0)
 				but.add (gtk.image_new_from_pixbuf(IB.GetPixBuf(type, rotation, accessible)))
 				self.widget.attach(but, x, x+1, y, y+1)
 				but.connect("clicked", self.ButClicked, x, y)
-				self.tiles.append(Tile(type, rotation, accessible))
 	def ButClicked(self, widget, x, y):
 		IB = PixBufBank()
 		tile = self.GetTile(x,y)
