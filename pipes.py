@@ -76,11 +76,14 @@ def GetTileFromConnections(con):
 			self.left = False
 			self.right = False
 		def String(self):
-			string = 'XXXX'
-			if self.up: string[0] = 'u'
-			if self.down: string[1]= 'd'
-			if self.left: string[2]= 'l'
-			if self.right: string[3]= 'r'
+			if self.up: string.append('u')
+			else: string.append('X')
+			if self.down:  string.append('d')
+			else: string.append('X')
+			if self.left:  string.append('l')
+			else: string.append('X')
+			if self.right: string.append('r')
+			else: string.append('X')
 	dir = direction()
 	for c in con:
 		if c.x == 0:
@@ -138,10 +141,11 @@ def HashToTile(hash):
 		
 
 class Tile:
-	def __init__(self, type, rotation, accessible=False):
+	def __init__(self, type, rotation, accessible=False, start=False):
 		self.type = type
 		self.rotation = rotation
 		self.accessible = accessible
+		self.start = False
 		
 class PipesGrid:
 	def __init__(self, xx=10, yy=10):
@@ -192,7 +196,16 @@ class PipesGrid:
 class Hello:
 	def destroy(self, widget, data=None):
 		gtk.main_quit()
-	def SetSize(self, widget, size=None):
+	def SetGSize(self, widget, x=None, y=None):
+		self.VBox.remove(self.grid.Widget())
+		c = Configuration()
+		c.GridXX = x
+		c.GridYY = y
+		self.grid = PipesGrid(c.GridXX, c.GridYY)
+		self.grid.Widget().show_all()
+		self.VBox.add (self.grid.Widget())
+		self.window.resize(1,1)
+	def SetTSize(self, widget, size=None):
 		if size > 0:
 			c = Configuration()
 			c.TileSize = size
@@ -224,8 +237,17 @@ class Hello:
 		for i in [5, 10, 15, 20, 30, 40, 50, 60, 70, 80]:
 			it = gtk.MenuItem("%d px"%i)
 			tsize_menu.append (it)
-			it.connect("activate", self.SetSize, i)
+			it.connect("activate", self.SetTSize, i)
 		tsize_menu_i.set_submenu (tsize_menu)
+
+		gsize_menu_i = gtk.MenuItem("_Grid Size")
+		menu_bar.append (gsize_menu_i)
+		gsize_menu = gtk.Menu()
+		for i in [5, 10, 15, 20, 30]:
+			it = gtk.MenuItem(repr(i)+'x'+repr(i))
+			gsize_menu.append (it)
+			it.connect("activate", self.SetGSize, i, i)
+		gsize_menu_i.set_submenu (gsize_menu)
 
 
 		self.grid = PipesGrid(c.GridXX, c.GridYY)
