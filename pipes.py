@@ -293,7 +293,7 @@ class PipesGrid:
 	def ButClicked(self, widget,event, x, y):
 		tile = self.GetTile(x,y)
 		tile.rotation = (tile.rotation + 1) % GetRotations(tile.type)
-		self.GetButton(x,y).queue_drawing()
+		self.widget.queue_draw()
 
 	def RegenerateImages(self):
 		self.RegenerateWGrid()
