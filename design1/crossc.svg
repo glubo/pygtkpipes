@@ -15,7 +15,7 @@
    inkscape:version="0.46"
    version="1.0"
    sodipodi:docbase="/home/glubo/src/pipemania/design1"
-   sodipodi:docname="cross.svg"
+   sodipodi:docname="crossc.svg"
    inkscape:output_extension="org.inkscape.output.svg.inkscape">
   <defs
      id="defs3102">
@@ -25,7 +25,7 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_z="100 : 50 : 1"
        inkscape:persp3d-origin="50 : 33.333333 : 1"
-       id="perspective3399" />
+       id="perspective3198" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -42,7 +42,7 @@
      showgrid="true"
      inkscape:window-width="797"
      inkscape:window-height="800"
-     inkscape:window-x="48"
+     inkscape:window-x="32"
      inkscape:window-y="0" />
   <metadata
      id="metadata3105">
@@ -63,7 +63,7 @@
        sodipodi:nodetypes="ccccc"
        id="path3098"
        d="M 45.005076,0 L 55.005076,0 L 55.005076,100 L 45.005076,100 L 45.005076,0 z "
-       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       style="fill:#0fb80f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:1;color:#000000;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <g
        id="g4012"
        transform="matrix(0,1,-1,0,99.54569,6.25e-2)" />
@@ -71,7 +71,7 @@
        sodipodi:nodetypes="ccccc"
        id="path4034"
        d="M 100,45 L 100,55 L 2.1e-06,55 L 2.1e-06,45 L 100,45 z "
-       style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       style="fill:#0fb80f;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;opacity:1;color:#000000;marker:none;marker-start:none;marker-mid:none;marker-end:none;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <g
        id="g4006"
        transform="translate(0,-0.471275)">
