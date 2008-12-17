@@ -26,6 +26,7 @@ class TileWidget(gtk.Widget):
 		gtk.Widget.__init__(self)
 		
 		self.tile = tile
+		self.MyFocus = False
 		
 	def do_realize(self):
 		
@@ -78,10 +79,13 @@ class TileWidget(gtk.Widget):
 		
 	def do_expose_event(self, event):
 		"""This is where the widget must draw itself."""
+		c = Configuration()
 		PB = PixBufBank()
 		t = self.tile
 		
 		self.window.draw_pixbuf(self.gc, PB.GetPixBuf(t.type, t.rotation, t.accessible), 0, 0, 0, 0,-1, -1)	
+		if self.MyFocus:
+			self.window.draw_rectangle (self.gc, False, 0, 0, c.TileSize-1, c.TileSize-1)
 		return True
 			
 			

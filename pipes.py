@@ -278,8 +278,14 @@ class PipesGrid:
 		for tile in self.tiles:
 			tile.rotation = random.randint(0, GetRotations(tile.type)-1)
 	def RegenerateWGrid(self):
+		self.Focus_x = 0
+		self.Focus_y = 0
 		self.buttons = []
 		self.widget = gtk.Table(rows=self.xx, columns=self.yy, homogeneous = True)
+		self.widget.set_flags(gtk.CAN_FOCUS)
+		self.widget.grab_focus()
+		self.widget.add_events(gtk.gdk.KEY_PRESS_MASK)
+		self.widget.connect ("key-press-event", self.KeyPress)
 		for y in range(0, self.yy):
 			for x in range(0, self.xx):
 				tile = self.GetTile(x, y)
@@ -290,6 +296,35 @@ class PipesGrid:
 				but = self.GetButton(x, y)
 				self.widget.attach(but, x, x+1, y, y+1)
 				but.connect("button-press-event", self.ButClicked, x, y)
+		self.GetButton (self.Focus_x, self.Focus_y).MyFocus = True
+	def KeyPress(self, widget, event):
+		name = gtk.gdk.keyval_name (event.keyval)
+		redraw = False
+		if name == 'Up':
+			self.GetButton (self.Focus_x, self.Focus_y).MyFocus = False
+			if self.Focus_y > 0: self.Focus_y -= 1
+			self.GetButton (self.Focus_x, self.Focus_y).MyFocus = True
+			redraw = True
+		elif name == 'Down':
+			self.GetButton (self.Focus_x, self.Focus_y).MyFocus = False
+			if self.Focus_y < self.yy-1: self.Focus_y += 1
+			self.GetButton (self.Focus_x, self.Focus_y).MyFocus = True
+			redraw = True
+		elif name == 'Left':
+			self.GetButton (self.Focus_x, self.Focus_y).MyFocus = False
+			if self.Focus_x > 0: self.Focus_x -= 1
+			self.GetButton (self.Focus_x, self.Focus_y).MyFocus = True
+			redraw = True
+		elif name == 'Right':
+			self.GetButton (self.Focus_x, self.Focus_y).MyFocus = False
+			if self.Focus_x < self.xx-1: self.Focus_x += 1
+			self.GetButton (self.Focus_x, self.Focus_y).MyFocus = True
+			redraw = True
+		elif name == 'space':
+			self.ButClicked(self, None, self.Focus_x, self.Focus_y)
+		if redraw:
+			self.widget.queue_draw()
+		return True
 	def ButClicked(self, widget,event, x, y):
 		tile = self.GetTile(x,y)
 		tile.rotation = (tile.rotation + 1) % GetRotations(tile.type)
