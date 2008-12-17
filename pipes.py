@@ -7,6 +7,7 @@ import random
 
 from configuration  import Configuration
 from pixbufbank import PixBufBank
+from tilewidget import TileWidget
 
 class Vec2:
 	def __init__(self, x=0, y=0):
@@ -269,38 +270,33 @@ class PipesGrid:
 		self.widget = gtk.Table(rows=xx, columns=yy, homogeneous = True)
 		self.xx = xx
 		self.yy = yy
-		self.buttons = []
 		self.tiles = GenerateTileGrid(xx, yy, xx/2, yy/2)
-		for y in range(0, yy):
-			for x in range(0,xx):
-				tile = self.tiles[x+y*xx]
+		self.Shake()
+		self.RegenerateWGrid()
+	
+	def Shake(self):
+		for tile in self.tiles:
+			tile.rotation = random.randint(0, GetRotations(tile.type)-1)
+	def RegenerateWGrid(self):
+		self.buttons = []
+		self.widget = gtk.Table(rows=self.xx, columns=self.yy, homogeneous = True)
+		for y in range(0, self.yy):
+			for x in range(0, self.xx):
+				tile = self.GetTile(x, y)
 				type = tile.type;
 				rotation = tile.rotation
 				accessible = tile.accessible
-				self.buttons.append(gtk.Button())
+				self.buttons.append(TileWidget(tile))
 				but = self.GetButton(x, y)
-				but.set_border_width(0)
-				but.add (gtk.image_new_from_pixbuf(IB.GetPixBuf(type, rotation, accessible)))
 				self.widget.attach(but, x, x+1, y, y+1)
-				but.connect("clicked", self.ButClicked, x, y)
-	def ButClicked(self, widget, x, y):
-		IB = PixBufBank()
+				but.connect("button-press-event", self.ButClicked, x, y)
+	def ButClicked(self, widget,event, x, y):
 		tile = self.GetTile(x,y)
 		tile.rotation = (tile.rotation + 1) % GetRotations(tile.type)
-		but = self.GetButton(x,y)
-		but.remove (but.get_child())
-		but.add (gtk.image_new_from_pixbuf(IB.GetPixBuf(tile.type, tile.rotation, tile.accessible)))
-		but.get_child().show()
+		self.GetButton(x,y).queue_drawing()
 
 	def RegenerateImages(self):
-		IB = PixBufBank()
-		for y in range(0, self.yy): 
-			for x in range(0, self.xx):
-				tile = self.GetTile(x,y)
-				but = self.GetButton(x,y)
-				but.remove (but.get_child())
-				but.add (gtk.image_new_from_pixbuf(IB.GetPixBuf(tile.type, tile.rotation, tile.accessible)))
-				but.get_child().show()
+		self.RegenerateWGrid()
 		
 	def GetButton(self, x, y):
 		return self.buttons[x+(y)*self.xx]
@@ -327,7 +323,10 @@ class Hello:
 			c.TileSize = size
 			IB = PixBufBank()
 			IB.LoadImages()
+			self.VBox.remove(self.grid.Widget())
 			self.grid.RegenerateImages()
+			self.grid.Widget().show_all()
+			self.VBox.add (self.grid.Widget())
 			self.window.resize(1,1)
 	def __init__(self):
 		c = Configuration()
@@ -369,6 +368,7 @@ class Hello:
 		self.grid = PipesGrid(c.GridXX, c.GridYY)
 		self.VBox.add (self.grid.Widget())
 		self.window.show_all()
+		self.SetTSize(None, c.TileSize) #ugly hack to show widgets at start
 	def main(self):
 		gtk.main()
 if __name__ == "__main__":

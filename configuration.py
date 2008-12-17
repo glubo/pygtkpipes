@@ -1,8 +1,8 @@
 class Configuration:
 	def Defaults(self):
 		self.TileSize = 30
-		self.GridXX = 3
-		self.GridYY = 3
+		self.GridXX = 10
+		self.GridYY = 10
 
 	#below is singleton implementation
 	class __impl:
