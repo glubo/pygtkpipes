@@ -350,8 +350,8 @@ class PipesGrid:
 				accessible = tile.accessible
 				self.buttons.append(TileWidget(tile))
 				but = self.GetButton(x, y)
-				self.widget.attach(but, x, x+1, y, y+1)
-				but.connect("button-press-event", self.ButClicked, x, y)
+				self.widget.attach(but, x, x+1, y, y+1, xoptions=gtk.SHRINK, yoptions=gtk.SHRINK)
+				but.connect("button-press-event", self.ButClick, x, y)
 		self.GetButton (self.Focus_x, self.Focus_y).MyFocus = True
 	def KeyPress(self, widget, event):
 		name = gtk.gdk.keyval_name (event.keyval)
@@ -377,11 +377,15 @@ class PipesGrid:
 			self.GetButton (self.Focus_x, self.Focus_y).MyFocus = True
 			redraw = True
 		elif name == 'space':
-			self.ButClicked(self, None, self.Focus_x, self.Focus_y)
+			self.ButClicked(self, self.Focus_x, self.Focus_y)
 		if redraw:
 			self.widget.queue_draw()
 		return True
-	def ButClicked(self, widget,event, x, y):
+	def ButClick(self, widget,event, x, y):
+		if event.button == 1 and event.type == gtk.gdk.BUTTON_PRESS:
+			self.ButClicked(widget, x, y)
+		return True
+	def ButClicked(self, widget, x, y):
 		tile = self.GetTile(x,y)
 		tile.rotation = (tile.rotation + 1) % GetRotations(tile.type)
 		self.UpdateAccess()
@@ -423,6 +427,7 @@ class Hello:
 	def __init__(self):
 		c = Configuration()
 		self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+		self.window.set_title('PyGtkPipes')
 		self.window.connect("destroy", self.destroy)
 		self.VBox = gtk.VBox()
 		self.window.add (self.VBox)
