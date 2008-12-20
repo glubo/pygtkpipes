@@ -320,8 +320,16 @@ class PipesGrid:
 					looseends.append(i_d)
 					connected += 1
 		if connected == self.xx*self.yy:
-			print 'Win'
+			self.Solved = True
+			self.OnSolved()
+		else:
+			self.Solved = False
+			
 
+	def OnSolved(self):
+		dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT, gtk.MESSAGE_INFO, gtk.BUTTONS_OK, "Congratulations!\nYou have completed this puzzle.")
+		dialog.run()
+		dialog.destroy()
 	def Shake(self):
 		for tile in self.tiles:
 			tile.rotation = random.randint(0, GetRotations(tile.type)-1)
@@ -439,7 +447,7 @@ class Hello:
 			it.connect("activate", self.SetTSize, i)
 		tsize_menu_i.set_submenu (tsize_menu)
 
-		gsize_menu_i = gtk.MenuItem("_Grid Size")
+		gsize_menu_i = gtk.MenuItem("_New Puzzle")
 		menu_bar.append (gsize_menu_i)
 		gsize_menu = gtk.Menu()
 		for i in [5, 10, 15, 20, 30]:
