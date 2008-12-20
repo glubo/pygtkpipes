@@ -63,7 +63,7 @@ def GetConnections(type, rotation):
 		if rotation == 0:
 			return [Vec2(0,1), Vec2(0,-1), Vec2(1,0)]
 		elif rotation == 1:
-			return [Vec2(0,1), Vec2(1,0), Vec2(0,1)]
+			return [Vec2(-1,0), Vec2(1,0), Vec2(0,1)]
 		elif rotation == 2:
 			return [Vec2(0,1), Vec2(0,-1), Vec2(-1,0)]
 		elif rotation == 3:
@@ -270,10 +270,58 @@ class PipesGrid:
 		self.widget = gtk.Table(rows=xx, columns=yy, homogeneous = True)
 		self.xx = xx
 		self.yy = yy
-		self.tiles = GenerateTileGrid(xx, yy, xx/2, yy/2)
+		self.sx = xx/2
+		self.sy = yy/2
+		self.tiles = GenerateTileGrid(xx, yy, self.sx, self.sy)
 		self.Shake()
 		self.RegenerateWGrid()
 	
+	def UpdateAccess(self):
+		looseends = []
+		def XY2I(x,y):
+			return x+y*self.xx
+		def I2VEC(i):
+			return Vec2(i%self.xx, i/self.xx)
+		def IsConnectedAndValidMove (i_o, dir):
+			t_o = self.tiles[i_o]
+			pos_o = I2VEC (i_o)
+			pos_d = Vec2 (pos_o.x + dir.x, pos_o.y + dir.y)
+			if not (0 <= pos_d.x < self.xx) or not (0 <= pos_d.y < self.yy):
+				return False
+			i_d = XY2I(pos_d.x, pos_d.y)
+			t_d = self.tiles[i_d]
+			if t_d.accessible:
+				return False
+			con_o = GetConnections(t_o.type, t_o.rotation)
+			con_d = GetConnections(t_d.type, t_d.rotation)
+			o_d = False
+			d_o = False
+			for con in con_o:
+				if con.x == dir.x and con.y == dir.y:
+					o_d = True
+			for con in con_d:
+				if con.x == 0-dir.x and con.y == 0-dir.y:
+					d_o = True
+			return o_d and d_o
+		for i in range(0, self.xx*self.yy):
+			self.tiles[i].accessible = False
+		looseends.append (XY2I (self.sx, self.sy))
+		connected = 0
+		while looseends.__len__() > 0:
+			i_o = looseends[0]
+			looseends.remove(i_o)
+			for d in [Vec2(-1,0), Vec2(0,1), Vec2(1,0), Vec2(0,-1)]:
+				if IsConnectedAndValidMove(i_o, d):
+					pos_o = I2VEC(i_o)
+					pos_d = Vec2(pos_o.x + d.x, pos_o.y + d.y)
+					i_d = XY2I(pos_d.x, pos_d.y)
+					t_d = self.tiles[i_d]
+					t_d.accessible = True
+					looseends.append(i_d)
+					connected += 1
+		if connected == self.xx*self.yy:
+			print 'Win'
+
 	def Shake(self):
 		for tile in self.tiles:
 			tile.rotation = random.randint(0, GetRotations(tile.type)-1)
@@ -328,6 +376,7 @@ class PipesGrid:
 	def ButClicked(self, widget,event, x, y):
 		tile = self.GetTile(x,y)
 		tile.rotation = (tile.rotation + 1) % GetRotations(tile.type)
+		self.UpdateAccess()
 		self.widget.queue_draw()
 
 	def RegenerateImages(self):
