@@ -1,0 +1,12 @@
+This is very simple game written in pygtk.
+Therefore You Will need pygtk and python, tested to work on pygtk-2.12.1-r2 and Python 2.5.2.
+
+Goal of the game:
+Your goal is to rotate pieces so they are all connected.
+
+Controls:
+Click on a tile to rotate it
+use arrow keys to move tile cursor
+use Space to rotate tile under tile cursor
+
+Author: Petr Sykora

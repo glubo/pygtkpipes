@@ -1,0 +1,4 @@
+fix positions of connections in design1
+comments, we need more comments
+Optimize UpdateAccess so it will search only parts of net, where it is needed
+Optimize generation of new puzzle
