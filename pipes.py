@@ -464,6 +464,12 @@ class Hello:
 
 		self.grid = PipesGrid(c.GridXX, c.GridYY)
 		self.VBox.add (self.grid.Widget())
+
+		#TODO: test on windows
+		iconpixbuf = gtk.gdk.pixbuf_new_from_file('design1/cross.svg')
+		self.window.set_icon(iconpixbuf)
+
+
 		self.window.show_all()
 		self.SetTSize(None, c.TileSize) #ugly hack to show widgets at start
 	def main(self):
