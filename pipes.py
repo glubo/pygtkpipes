@@ -382,12 +382,17 @@ class PipesGrid:
 			self.widget.queue_draw()
 		return True
 	def ButClick(self, widget,event, x, y):
-		if event.button == 1 and event.type == gtk.gdk.BUTTON_PRESS:
-			self.ButClicked(widget, x, y)
+		if (event.button == 1 or event.button == 3) and event.type == gtk.gdk.BUTTON_PRESS:
+			self.ButClicked(widget, x, y, event.button)
 		return True
-	def ButClicked(self, widget, x, y):
+	def ButClicked(self, widget, x, y, button=1):
 		tile = self.GetTile(x,y)
-		tile.rotation = (tile.rotation + 1) % GetRotations(tile.type)
+		rot = 0
+		if button == 1:
+			rot = 1
+		elif button == 3:
+			rot = -1
+		tile.rotation = (tile.rotation + rot) % GetRotations(tile.type)
 		self.UpdateAccess()
 		self.widget.queue_draw()
 
@@ -468,7 +473,6 @@ class Hello:
 		#TODO: test on windows
 		iconpixbuf = gtk.gdk.pixbuf_new_from_file('design1/cross.svg')
 		self.window.set_icon(iconpixbuf)
-
 
 		self.window.show_all()
 		self.SetTSize(None, c.TileSize) #ugly hack to show widgets at start
