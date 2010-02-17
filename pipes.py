@@ -409,6 +409,17 @@ class PipesGrid:
 class Hello:
 	def destroy(self, widget, data=None):
 		gtk.main_quit()
+	def SetTDesign(self, widget, design=None):
+		c = Configuration()
+		IB = PixBufBank()
+		IB.SetDesign (design)
+		IB.LoadImages()
+		self.VBox.remove(self.grid.Widget())
+		self.grid.RegenerateImages()
+		self.grid.Widget().show_all()
+		self.VBox.add (self.grid.Widget())
+		self.window.resize(1,1)
+		
 	def SetGSize(self, widget, x=None, y=None):
 		self.VBox.remove(self.grid.Widget())
 		c = Configuration()
@@ -465,6 +476,15 @@ class Hello:
 			gsize_menu.append (it)
 			it.connect("activate", self.SetGSize, i, i)
 		gsize_menu_i.set_submenu (gsize_menu)
+
+		tdesign_menu_i = gtk.MenuItem("_Design")
+		menu_bar.append (tdesign_menu_i)
+		tdesign_menu = gtk.Menu()
+		for i in [1, 2]:
+			it = gtk.MenuItem("%d px"%i)
+			tdesign_menu.append (it)
+			it.connect("activate", self.SetTDesign, i)
+		tdesign_menu_i.set_submenu (tdesign_menu)
 
 
 		self.grid = PipesGrid(c.GridXX, c.GridYY)

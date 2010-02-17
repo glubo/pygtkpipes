@@ -17,42 +17,44 @@ class PixBufBank:
 			return self.I[rotation+10+offset]
 		elif type == 4:
 			return self.I[14+offset]
+	def SetDesign(self, design):
+		self.design = int(design)
 	def LoadImages(self):
 		c = Configuration()
 		self.I = []
-		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design1/end.svg', c.TileSize, c.TileSize))#0
+		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design'+str(self.design)+'/end.svg', c.TileSize, c.TileSize))#0
 		self.I.append(self.I[0].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#1
 		self.I.append(self.I[1].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#2
 		self.I.append(self.I[2].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#3
-		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design1/I.svg', c.TileSize, c.TileSize))#4
+		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design'+str(self.design)+'/I.svg', c.TileSize, c.TileSize))#4
 		self.I.append(self.I[4].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#5
 
-		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design1/L.svg', c.TileSize, c.TileSize))#6
+		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design'+str(self.design)+'/L.svg', c.TileSize, c.TileSize))#6
 		self.I.append(self.I[6].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#7
 		self.I.append(self.I[7].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#8
 		self.I.append(self.I[8].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#9
-		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design1/T.svg', c.TileSize, c.TileSize))#10
+		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design'+str(self.design)+'/T.svg', c.TileSize, c.TileSize))#10
 		self.I.append(self.I[10].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#11
 		self.I.append(self.I[11].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#12
 		self.I.append(self.I[12].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#13
-		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design1/cross.svg', c.TileSize, c.TileSize))#14
+		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design'+str(self.design)+'/cross.svg', c.TileSize, c.TileSize))#14
 
-		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design1/endc.svg', c.TileSize, c.TileSize))#15
+		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design'+str(self.design)+'/endc.svg', c.TileSize, c.TileSize))#15
 		self.I.append(self.I[15].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#16
 		self.I.append(self.I[16].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#17
 		self.I.append(self.I[17].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#18
-		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design1/Ic.svg', c.TileSize, c.TileSize))#19
+		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design'+str(self.design)+'/Ic.svg', c.TileSize, c.TileSize))#19
 		self.I.append(self.I[19].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#20
 
-		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design1/Lc.svg', c.TileSize, c.TileSize))#21
+		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design'+str(self.design)+'/Lc.svg', c.TileSize, c.TileSize))#21
 		self.I.append(self.I[21].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#22
 		self.I.append(self.I[22].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#23
 		self.I.append(self.I[23].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#24
-		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design1/Tc.svg', c.TileSize, c.TileSize))#25
+		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design'+str(self.design)+'/Tc.svg', c.TileSize, c.TileSize))#25
 		self.I.append(self.I[25].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#26
 		self.I.append(self.I[26].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#27
 		self.I.append(self.I[27].rotate_simple(gtk.gdk.PIXBUF_ROTATE_CLOCKWISE))#28
-		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design1/crossc.svg', c.TileSize, c.TileSize))#29
+		self.I.append(gtk.gdk.pixbuf_new_from_file_at_size('design'+str(self.design)+'/crossc.svg', c.TileSize, c.TileSize))#29
 
 	#below is singleton implementation
 	class __impl:
@@ -65,6 +67,7 @@ class PixBufBank:
 		if PixBufBank.__instance is None:
 			# Create and remember instance
 			PixBufBank.__instance = PixBufBank.__impl()
+			self.SetDesign(2)
 			self.LoadImages()
 
 		# Store instance reference as the only member in the handle
