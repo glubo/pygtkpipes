@@ -481,7 +481,7 @@ class Hello:
 		menu_bar.append (tdesign_menu_i)
 		tdesign_menu = gtk.Menu()
 		for i in [1, 2]:
-			it = gtk.MenuItem("%d px"%i)
+			it = gtk.MenuItem("%d"%i)
 			tdesign_menu.append (it)
 			it.connect("activate", self.SetTDesign, i)
 		tdesign_menu_i.set_submenu (tdesign_menu)
