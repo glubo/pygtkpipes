@@ -15,6 +15,7 @@ class Vec2:
 # 4: +
 
 def GetRotations(type):
+	"""Return (integer) how many rotations can have given type of tile"""
 	if type == 0:
 		return 4
 	elif type == 1:
@@ -28,6 +29,7 @@ def GetRotations(type):
 	else: return 1
 
 def GetConnections(type, rotation):
+	"""Return (array of Vec2) which connections have given type (int) of tile at given rotation (int)"""
 	if type == 0:
 		if rotation == 0:
 			return [Vec2(0,1)]
@@ -65,6 +67,11 @@ def GetConnections(type, rotation):
 	else: return []
 
 def GenerateTileGrid(xx,yy,sx,sy):
+	"""
+		Generate new random grid of size xx*yy with start at [sx, sy]
+
+		return value is 1d array of Tile
+	"""
 	grid = []
 	tgrid = []
 	looseends = []
@@ -152,40 +159,6 @@ def GenerateTileGrid(xx,yy,sx,sy):
 	PrintGrid()
 	return tgrid
 
-	
-def GetTileFromConnections(con):
-	class direction:
-		def __init__(self):
-			self.up = False
-			self.down = False
-			self.left = False
-			self.right = False
-		def String(self):
-			string = ''
-			if self.up: string+='u'
-			else: string+='X'
-			if self.down:  string+='d'
-			else: string+='X'
-			if self.left:  string+='l'
-			else: string+='X'
-			if self.right: string+='r'
-			else: string+='X'
-			return string
-	dir = direction()
-	for c in con:
-		if c.x == 0:
-			if c.y == -1:
-				dir.up = True
-			elif c.y == 1:
-				dir.down = True
-		elif c.y == 0:
-			if c.x == -1:
-				dir.left = True
-			elif c.x == 1:
-				dir.right = True
-	hash = dir.String()
-	return HashToTile(hash)
-
 def HashToTile(hash):
 	if hash[0] == 'u':
 		if hash[1] == 'd':
@@ -226,6 +199,41 @@ def HashToTile(hash):
 		return Tile(0, 3)
 	else: return Tile(4,0)
 		
+	
+def GetTileFromConnections(con):
+	"""Convert Connections (array of Vec2) to Tile"""
+	class direction:
+		def __init__(self):
+			self.up = False
+			self.down = False
+			self.left = False
+			self.right = False
+		def String(self):
+			string = ''
+			if self.up: string+='u'
+			else: string+='X'
+			if self.down:  string+='d'
+			else: string+='X'
+			if self.left:  string+='l'
+			else: string+='X'
+			if self.right: string+='r'
+			else: string+='X'
+			return string
+	dir = direction()
+	for c in con:
+		if c.x == 0:
+			if c.y == -1:
+				dir.up = True
+			elif c.y == 1:
+				dir.down = True
+		elif c.y == 0:
+			if c.x == -1:
+				dir.left = True
+			elif c.x == 1:
+				dir.right = True
+	hash = dir.String()
+	return HashToTile(hash)
+
 
 class Tile:
 	def __init__(self, type, rotation, accessible=False, start=False):
