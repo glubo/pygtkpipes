@@ -156,7 +156,7 @@ def GenerateTileGridA(xx,yy,sx,sy):
 
 	#here we have already grid full, now only convert to hgrid:
 	GridToTGrid()
-	PrintGrid()
+	#PrintGrid()
 	return tgrid
 
 def HashToTile(hash):
@@ -335,4 +335,7 @@ class Grid:
 	def IsSolved (self):
 		"""return (bool) "Are all tiles accessible?" """
 		return self.Solved
-				
+	def Rotate (self, x, y, dir):
+		"""Rotate tile at [x,y] (dir==1:CW, dir==-1:CCW, dir==0:let it be as is)"""
+		tile = self.GetTile(x,y)
+		tile.rotation = (tile.rotation + dir) % GetRotations(tile.type)

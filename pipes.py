@@ -80,13 +80,12 @@ class PipesGrid:
 			self.ButClicked(widget, x, y, event.button)
 		return True
 	def ButClicked(self, widget, x, y, button=1):
-		tile = self.grid.GetTile(x,y)
 		rot = 0
 		if button == 1:
 			rot = 1
 		elif button == 3:
 			rot = -1
-		tile.rotation = (tile.rotation + rot) % grid.GetRotations(tile.type)
+		self.grid.Rotate (x, y, rot)
 		self.UpdateAccess()
 		self.widget.queue_draw()
 
