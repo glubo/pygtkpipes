@@ -47,7 +47,7 @@
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1278"
-     inkscape:window-height="760"
+     inkscape:window-height="984"
      inkscape:window-x="0"
      inkscape:window-y="38"
      inkscape:window-maximized="1" />
@@ -59,7 +59,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -68,15 +68,15 @@
      inkscape:groupmode="layer"
      id="layer1">
     <path
-       style="fill:#1f1c24;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.09598857000000000;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.76790868999999984, 0.76790868999999984;stroke-dashoffset:0"
+       style="fill:#204a87;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.09598857000000000;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.76790868999999984, 0.76790868999999984;stroke-dashoffset:0"
        d="M 50 19.90625 C 33.37356 19.90625 19.90625 33.37356 19.90625 50 C 19.90625 61.188052 26.003962 70.935453 35.0625 76.125 L 35.0625 99.9375 L 64.9375 99.9375 L 64.9375 76.125 C 73.996038 70.935453 80.09375 61.188052 80.09375 50 C 80.09375 33.37356 66.62644 19.90625 50 19.90625 z "
        id="path7174" />
     <path
-       style="fill:#22280b;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.08169570000000000;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.65356566999999999, 0.65356566999999999;stroke-dashoffset:0"
+       style="fill:#cc0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.08169570000000000;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.65356566999999999, 0.65356566999999999;stroke-dashoffset:0"
        d="M 50 25.28125 C 36.355957 25.28125 25.28125 36.355957 25.28125 50 C 25.28125 59.757104 30.943733 68.204095 39.15625 72.21875 L 39.15625 99.96875 L 60.84375 99.96875 L 60.84375 72.21875 C 69.056267 68.204095 74.71875 59.757104 74.71875 50 C 74.71875 36.355957 63.644043 25.28125 50 25.28125 z "
        id="path7161" />
     <path
-       style="fill:#1f1c24;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.10000000000000001;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.80000000000000004, 0.80000000000000004;stroke-dashoffset:0"
+       style="fill:#204a87;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.10000000000000001;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:0.80000000000000004, 0.80000000000000004;stroke-dashoffset:0"
        d="m 25.0625,99.9375 0,-6.75 C 25.0625,91.4147 26.4772,90 28.25,90 l 43.46875,0 c 1.7728,0 3.21875,1.4147 3.21875,3.1875 l 0,6.75 -49.875,0 z"
        id="rect6436-4" />
   </g>
