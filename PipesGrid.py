@@ -16,6 +16,7 @@ class PipesGrid:
 		self.widget = gtk.Table(rows=xx, columns=yy, homogeneous = True)
 		self.grid = grid.Grid (xx, yy)
 		self.grid.Shake()
+		self.UpdateAccess ()
 		self.RegenerateWGrid()
 	
 	def UpdateAccess(self):
